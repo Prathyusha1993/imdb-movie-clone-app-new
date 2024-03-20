@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div>IMDB MOVIE CLONE APP</div>
-      <h2>testing using vite</h2>
+      <h2 className="text-3xl font-bold underline">testing using vite</h2>
     </>
   );
 }
