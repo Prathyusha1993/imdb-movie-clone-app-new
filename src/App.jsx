@@ -2,12 +2,21 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import NavbarComp from "./components/NavbarComp";
+import Movies from "./components/Movies";
+import WatchList from "./components/WatchList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div>IMDB MOVIE CLONE APP</div>
-      <h2 className="text-3xl font-bold underline">testing using vite</h2>
+      <BrowserRouter>
+        <NavbarComp />
+        <Routes>
+          <Route path="/" element={<Movies />} />
+          <Route path="/watchlist" element={<WatchList />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
