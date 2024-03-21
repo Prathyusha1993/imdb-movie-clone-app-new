@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import axios from "axios";
+import Pagination from "./Pagination";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+
+  const handlePrevPage = () => {
+    if (pageNo === 1) {
+      setPageNo(pageNo);
+    } else {
+      setPageNo(pageNo - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    setPageNo(pageNo + 1);
+  };
 
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=6e07b1f77e80ddd4e3cd709d8df384d4&language=en-US&page=2"
+        `https://api.themoviedb.org/3/movie/popular?api_key=6e07b1f77e80ddd4e3cd709d8df384d4&language=en-US&page=${pageNo}`
       )
-      .then((res) => setMovies(res.data.results));
-  }, []);
+      .then((res) => {
+        console.log(res.data.results);
+        setMovies(res.data.results);
+      });
+  }, [pageNo]);
 
   return (
     <div className="p-5">
@@ -26,6 +43,11 @@ const Movies = () => {
           );
         })}
       </div>
+      <Pagination
+        handlePrevPage={handlePrevPage}
+        handleNextPage={handleNextPage}
+        pageNo={pageNo}
+      />
     </div>
   );
 };
