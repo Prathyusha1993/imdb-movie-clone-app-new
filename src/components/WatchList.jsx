@@ -1,6 +1,6 @@
 import React from "react";
 
-const WatchList = () => {
+const WatchList = ({ watchlist }) => {
   return (
     <>
       <div className="flex justify-center flex-wrap m-4">
@@ -32,38 +32,24 @@ const WatchList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b-2">
-              <td className="flex items-center px-6 py-4">
-                <img
-                  className="h-[6rem] w-10rem]"
-                  src={
-                    "https://media.harrypotterfanzone.com/philosophers-stone-20-years-of-movie-magic-ron-poster.jpg"
-                  }
-                  alt=""
-                />
-                <div className="mx-15">Harry</div>
-              </td>
-              <td>4</td>
-              <td>8765</td>
-              <td>Drama</td>
-              <td className="text-red-800">Delete</td>
-            </tr>
-            <tr className="border-b-2">
-              <td className="flex items-center px-6 py-4">
-                <img
-                  className="h-[6rem] w-10rem]"
-                  src={
-                    "https://media.harrypotterfanzone.com/philosophers-stone-20-years-of-movie-magic-ron-poster.jpg"
-                  }
-                  alt=""
-                />
-                <div className="mx-15">Harry</div>
-              </td>
-              <td>4</td>
-              <td>8765</td>
-              <td>Drama</td>
-              <td className="text-red-800">Delete</td>
-            </tr>
+            {watchlist.map((movieObj) => {
+              return (
+                <tr className="border-b-2">
+                  <td className="flex items-center px-6 py-4">
+                    <img
+                      className="h-[6rem] w-10rem]"
+                      src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`}
+                      alt=""
+                    />
+                    <div className="mx-15">{movieObj.title}</div>
+                  </td>
+                  <td>{movieObj.vote_average}</td>
+                  <td>{movieObj.popularity}</td>
+                  <td>Drama</td>
+                  <td className="text-red-800">Delete</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

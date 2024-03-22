@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -13,6 +13,7 @@ function App() {
 
   const handleAddToWatchList = (movie) => {
     let newWatchList = [...watchlist, movie];
+    localStorage.setItem("moviesApp", JSON.stringify(newWatchList));
     setWatchlist(newWatchList);
     console.log(newWatchList);
   };
@@ -24,6 +25,14 @@ function App() {
     setWatchlist(filteredWatchList);
     console.log(filteredWatchList);
   };
+
+  useEffect(() => {
+    let moviesFromLocalStorage = localStorage.getItem("moviesApp");
+    if (!moviesFromLocalStorage) {
+      return;
+    }
+    setWatchlist(JSON.parse(moviesFromLocalStorage));
+  }, []);
 
   return (
     <>
@@ -43,7 +52,10 @@ function App() {
               </>
             }
           />
-          <Route path="/watchlist" element={<WatchList />} />
+          <Route
+            path="/watchlist"
+            element={<WatchList watchlist={watchlist} />}
+          />
         </Routes>
       </BrowserRouter>
     </>
