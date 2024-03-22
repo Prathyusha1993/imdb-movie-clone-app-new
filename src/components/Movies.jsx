@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import axios from "axios";
 import Pagination from "./Pagination";
 
-const Movies = () => {
+const Movies = ({ handleAddToWatchList }) => {
   const [movies, setMovies] = useState([]);
   const [pageNo, setPageNo] = useState(1);
 
@@ -39,6 +39,9 @@ const Movies = () => {
             <MovieCard
               poster_path={movie.poster_path}
               name={movie.original_title}
+              handleAddToWatchList={handleAddToWatchList}
+              movie={movie}
+              key={movie.id}
             />
           );
         })}
